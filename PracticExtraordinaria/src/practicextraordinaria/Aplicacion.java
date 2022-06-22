@@ -1,68 +1,200 @@
 package practicextraordinaria;
 
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
+
+
 /**
- *
- * @author emmar
- */
+*
+* @author paula
+*/
 public class Aplicacion {
-    
-    File ficheroElegido;
-    File ficheroUsuarios = new File ("./ficheroUsuarios.txt");
-    File ficheroOperadores = new File ("./ficheroOperadores.txt");
-    
-    Aplicacion (){
+
+private String ficheroEscogido;
+private Usuario usuario;
+private Operador operador;
+
+
+Scanner lectura = new Scanner(System.in);
+
+    Aplicacion() throws IOException, FileNotFoundException, ClassNotFoundException {
+
     }
+
+
     
-    public void registrarse () throws FileNotFoundException, IOException {
-        
-        Scanner sc = new Scanner(System.in);
+    public void registrarse () throws FileNotFoundException, IOException, ClassNotFoundException {
         
         System.out.println("1)Registrarse como usuario");
         System.out.println("2)Registrarse como operador");
-        String opcion = sc.next();
-        
+        String opcion = lectura.next();
+
         if ("1".equals(opcion)){
-            ficheroElegido = ficheroUsuarios;
+            ficheroEscogido = "FicherosMP/ficheroUsuarios.txt";
         }
         else if ("2".equals(opcion)){
-            ficheroElegido = ficheroOperadores;
+            ficheroEscogido = "FicherosMP/ficheroOperadores.txt";
         }
         
-        System.out.print("Inserte su nick: ");
-        String nick = sc.next();
-        
-        Scanner sc2 = new Scanner(ficheroElegido);
         boolean encontrado = false;
-        
-        while ((sc2.hasNextLine()) && (encontrado == false)){
-            String nombre = sc2.next();
-            if (!(nick.equals(nombre))){
-                sc2.nextLine();
-            }
-            else{
-                    System.out.println("Nick no disponible");
-                    encontrado = true;
-                    }    
-            }
-    
-            
+
+        System.out.print("Inserte su nick: ");
+        String nick = lectura.next();
+
+        FileReader f = new FileReader(ficheroEscogido);
+
+        Scanner sc = new Scanner(f); //se procede a comprobar si existe el usuario
+        while ((sc.hasNext()) && (encontrado == false)){
+        String nombre = sc.next();
+        if (!(nick.equals(nombre))){
+          
+        sc.nextLine();
+        }
+        else{
+        System.out.println("Nick no disponible");
+        encontrado = true;
+        }
+        }
+
+
         if (encontrado == false){
             System.out.print("Inserte su contraseña: ");
-            String contraseña = sc.next();
-            
-            FileWriter fw = new FileWriter(ficheroElegido,true);
+            String contraseña = lectura.next();
+          
+
+            FileWriter fw = new FileWriter(ficheroEscogido,true);
             BufferedWriter bw = new BufferedWriter(fw);
-            bw.newLine();
+            //bw.newLine();
             bw.write(nick+" "+contraseña);
+            bw.newLine();
+            bw.close();
             
+            usuario = new Usuario(nick, contraseña);
+            usuario.mostrarMenu();
         }
+        
     }
+    
+    public void login() throws FileNotFoundException, IOException, ClassNotFoundException{
+        System.out.println("1)Iniciar sesión como usuario");
+        System.out.println("2)Iniciar sesión como operador");
+        String opcion = lectura.next();
+
+        if ("1".equals(opcion)){
+        ficheroEscogido = "FicherosMP/ficheroUsuarios.txt";
+        }
+        else if ("2".equals(opcion)){
+        ficheroEscogido = "FicherosMP/ficheroOperadores.txt";
+        }
+        boolean encontrado = false;
+        BufferedWriter bw;
+
+        System.out.print("Inserte su nick: ");
+        String nick = lectura.next();
+
+        System.out.print("Inserte su contraseña: ");
+        String contraseña = lectura.next();
+
+        FileReader f = new FileReader(ficheroEscogido);
+
+        Scanner sc = new Scanner(f); //se procede a comprobar si existe el usuario
+        while ((sc.hasNext()) && (encontrado == false)){
+        String credenciales = sc.nextLine();
+        if ((nick+" "+contraseña).equals(credenciales)){
+        System.out.println("Sesion iniciada");
+        encontrado = true;
+        }
+        }
+        if (encontrado == false){
+        System.out.println("Usuario no encontrado");
+        }
+
+        if (encontrado == true){
+            if ("1".equals(opcion)){
+            usuario = new Usuario(nick,contraseña);
+            usuario.mostrarMenu();
+            }
+            else if ("2".equals(opcion)){
+            operador = new Operador();
+            //operador.mostrarMenu();
+            }
+        }
+
+    }
+
+    public void mostrarMenu() throws IOException, FileNotFoundException, ClassNotFoundException {
+        
+        System.out.println("1) REGISTRARSE");
+        System.out.println("2) INICIAR SESION");
+        System.out.println("3) DARSE DE BAJA");
+        System.out.println("4) SALIR");
+        
+        String c = lectura.next();
+
+        if ("1".equals(c)){
+            registrarse();
+        }
+        else if ("2".equals(c)){
+            login();
+        }
+        else if ("3".equals(c)){
+            darseBaja();
+        }
+        else if ("4".equals(c)){
+            salir();
+        }
+        else{
+        System.out.println("Opción no válida");
+        this.mostrarMenu();
+        }
+        
+    }
+
+    public void darseBaja() throws FileNotFoundException, IOException{
+        boolean encontrado = false;
+        BufferedWriter bw;
+
+        System.out.print("Inserte su nick: ");
+        String nick = lectura.next();
+
+        System.out.println("Inserte su contraseña: ");
+        String contraseña = lectura.next();
+
+        FileReader f = new FileReader("FicherosMP/ficheroUsuarios.txt");
+
+        Scanner sc = new Scanner(f);
+
+        FileWriter fw = new FileWriter("FicherosMP/ficheroUsuarios.txt");
+        bw = new BufferedWriter(fw);
+
+        while (sc.hasNext()){ //se procede a comprobar si existe el usuario
+            String linea = sc.nextLine();
+            if ((nick+" "+contraseña).equals(linea)){
+                encontrado = true;
+            }
+            if (encontrado == true){
+                bw.write(sc.nextLine());
+            }
+        }
+        bw.close();
+    }
+
+
+    private void salir() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
+
+
+
+
+
