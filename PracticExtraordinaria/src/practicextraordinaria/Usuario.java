@@ -27,6 +27,7 @@ private String numReg;
 public File ficheroUsuario;
 
 public Personaje personaje;
+
 //private String tipo;
 
 
@@ -146,28 +147,22 @@ public void registrarPersonaje() throws IOException {
 
 
 public void darDeBajaPersonaje(){
-String ruta;
-Boolean encontrado;
-encontrado = false;
-ruta = "C:\\Users\\Usuario\\OneDrive - Universidad Rey Juan Carlos\\Documentos\\NetBeansProjects\\PracticaMP\\PracticaMP\\OneDrive - Universidad Rey Juan Carlos\\Documentos\\NetBeansProjects\\PracticaMP\\"+nick+".txt";
+    String ruta;
+    Boolean encontrado;
+    encontrado = false;
+    ruta = "C:\\Users\\Usuario\\OneDrive - Universidad Rey Juan Carlos\\Documentos\\NetBeansProjects\\PracticaMP\\PracticaMP\\OneDrive - Universidad Rey Juan Carlos\\Documentos\\NetBeansProjects\\PracticaMP\\"+nick+".txt";
 }
 
 public void elegirEquipo(){
-personaje.setEquipo();
+    personaje.setEquipo();
 
 }
 
-public float verOro(){
-return personaje.getOro();
+public float consultarOro(){
+    return personaje.getOro();
 
 }
 
-public void consultarOro(){
-verOro();
-//recorrer el fichero de historial de combates y comprobar si tu nick está en desafiante o desafiado,
-//y si es igual a uno de los dos, comprobar si también es igual al del ganador,
-//si es igual, se muestra el oro ganado en ese combate, si no es igual se muestra pero en negativo
-}
 
 public void verRanking(){
 
@@ -235,6 +230,32 @@ public void mostrarMenu() throws IOException, FileNotFoundException, ClassNotFou
     }
 
 }
+
+    private void consultarEquipo() {
+        //hacer caso si no esta lleno
+        System.out.println("Tienes estas armas: ");
+        for (int i = 0; i < personaje.getEquipo().getListaArmas().size(); i++){
+            System.out.println(personaje.getEquipo().getListaArmas().get(i).getNombre());
+        }
+        
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void consultarEsbirros() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void subscribirseOferta() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void crearOferta() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void consultarOfertas() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
 
 }

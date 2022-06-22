@@ -14,7 +14,7 @@ public class Start {
     
     public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
         app = new Aplicacion();
-        app.registrarse();
+        app.mostrarMenu();
         
     }
     

@@ -33,9 +33,6 @@ public class Personaje implements Serializable{
     
     Personaje(){
         int edad = (int)(Math. random()*10+1);
-        cazador = new Cazador();
-        licantropo = new Licantropo();      
-        vampiro = new Vampiro(edad);
         this.nick = nick;
         this.oro = oro;
         
@@ -57,15 +54,25 @@ public class Personaje implements Serializable{
         String opcion = lectura.next();
         
         if ("1".equals(opcion)){
-            setTipo("Cazador");          
+            setTipo("Cazador"); 
+            Cazador cazador = new Cazador(3);
+            
         }
         else if ("2".equals(opcion)){
             setTipo("Licantropo");
+            Licantropo licantropo = new Licantropo(0);
+            
         }
         else if ("3".equals(opcion)){
             setTipo("Vampiro");
+            Vampiro vampiro = new Vampiro(0, 0);
+            
         }
         return tipo;
+    }
+    
+    public Equipo getEquipo() {
+        return equipo;
     }
     
     
@@ -178,12 +185,9 @@ public class Personaje implements Serializable{
         this.poder = poder;
     }
 
+
+
     
-
-
-    public Equipo getEquipo() {
-        return equipo;
-    }
 
     public Cazador getCazador() {
         return cazador;
@@ -200,5 +204,13 @@ public class Personaje implements Serializable{
     public Modificador getModificador() {
         return modificador;
     }*/
+
+    void setEquipo() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    float getOro() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
 }
