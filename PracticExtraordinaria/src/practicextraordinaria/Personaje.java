@@ -5,14 +5,200 @@
  */
 package practicextraordinaria;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Scanner;
+
 /**
  *
  * @author emmar
  */
-class Personaje {
+public class Personaje implements Serializable{
+    private String nick;
+    private String nombre;
+    private Equipo equipo = new Equipo();
+    private ArrayList<Esbirro> esbirros;
+    private float oro;
+    private int salud;
+    private int edad;
+    private Modificador modificador = new Modificador();
+    
+    private String tipo;
+    
+    /*private Cazador cazador;
+    private Licantropo licantropo;
+    private Vampiro vampiro;
+    */
+    
+    Personaje(){
+        int edad = (int)(Math. random()*10+1);
+        cazador = new Cazador();
+        licantropo = new Licantropo();      
+        vampiro = new Vampiro(edad);
+        this.nick = nick;
+        this.oro = oro;
+        
+    }
 
-    Personaje(String nick, float f, int numEsbirros) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
     
+    
+    public String getTipo(){
+        Scanner lectura = new Scanner(System.in);
+        
+        System.out.println("Escoger personaje: ");
+        System.out.println("1)Cazador");
+        System.out.println("2)Licantropo");
+        System.out.println("3)Vampiro");
+        
+        String opcion = lectura.next();
+        
+        if ("1".equals(opcion)){
+            setTipo("Cazador");          
+        }
+        else if ("2".equals(opcion)){
+            setTipo("Licantropo");
+        }
+        else if ("3".equals(opcion)){
+            setTipo("Vampiro");
+        }
+        return tipo;
+    }
+    
+    
+    /*
+    
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    
+    
+    public void inicializarEsbirros(int j){
+        ArrayList<Esbirro> listaEsbirros = new ArrayList<Esbirro>();
+        for (int i=0 ; i < j; i++){
+            switch(i){
+                case 0:{
+                        Esbirro esbirro1 = new Esbirro();
+                        listaEsbirros.add(esbirro1);
+                        listaEsbirros.get(i).setNombre("esbirro1");
+                        listaEsbirros.get(i).setSalud((int) (Math. random()*3+1));
+                   
+                        break;
+                }
+                        
+                case 1: {
+                       Esbirro esbirro2 = new Esbirro();
+                        listaEsbirros.add(esbirro2);
+                        listaEsbirros.get(i).setNombre("esbirro2");
+                        listaEsbirros.get(i).setSalud((int) (Math. random()*3+1));
+                   
+                        break;
+                }
+                case 2: {
+                        Esbirro esbirro3 = new Esbirro();
+                        listaEsbirros.add(esbirro3);
+                        listaEsbirros.get(i).setNombre("esbirro3");
+                        listaEsbirros.get(i).setSalud((int) (Math. random()*3+1));
+                   
+                        break;
+                }
+                case 3:{
+                        Esbirro esbirro4 = new Esbirro();
+                        listaEsbirros.add(esbirro4);
+                        listaEsbirros.get(i).setNombre("esbirro4");
+                        listaEsbirros.get(i).setSalud((int) (Math. random()*3+1));
+                   
+                        break;
+                    
+                }
+                case 4:{
+                        Esbirro esbirro5 = new Esbirro();
+                        listaEsbirros.add(esbirro5);
+                        listaEsbirros.get(i).setNombre("esbirro5");
+                        listaEsbirros.get(i).setSalud((int) (Math. random()*3+1));
+                   
+                        break;
+                }
+            }
+            
+                  
+        }
+        
+    }
+   
+
+    public String getNick() {
+        return nick;
+    }
+    
+    public void setEquipo() {
+        System.out.println("he llegado");
+        equipo.inicializarEquipo();
+        equipo.equipar();
+    }
+
+    
+
+    public ArrayList<Esbirro> getEsbirros() {
+        return esbirros;
+    }
+
+    public void setEsbirros(ArrayList<Esbirro> esbirros) {
+        this.esbirros = esbirros;
+    }
+
+    public float getOro() {
+        return oro;
+    }
+
+    public void setOro(float oro) {
+        this.oro = oro;
+    }
+
+    public int getSalud() {
+        return salud;
+    }
+
+    public void setSalud(int salud) {
+        this.salud = salud;
+    }
+
+    public int getPoder() {
+        return poder;
+    }
+
+    public void setPoder(int poder) {
+        this.poder = poder;
+    }
+
+    
+
+
+    public Equipo getEquipo() {
+        return equipo;
+    }
+
+    public Cazador getCazador() {
+        return cazador;
+    }
+
+    public Licantropo getLicantropo() {
+        return licantropo;
+    }
+
+    public Vampiro getVampiro() {
+        return vampiro;
+    }
+
+    public Modificador getModificador() {
+        return modificador;
+    }*/
+
 }

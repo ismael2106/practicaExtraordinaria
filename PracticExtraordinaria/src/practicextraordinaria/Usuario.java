@@ -18,8 +18,6 @@ import java.util.logging.Logger;
 */
 public class Usuario {
 
-Personaje personaje; 
-
 Scanner lectura = new Scanner(System.in);
 
 private String nick;
@@ -27,6 +25,8 @@ private String nombre;
 private String contraseña;
 private String numReg;
 public File ficheroUsuario;
+
+public Personaje personaje;
 //private String tipo;
 
 
@@ -84,78 +84,64 @@ public File getFicheroUsuario() {
 
 
 
-public void deserializarUsuario() throws FileNotFoundException, IOException, ClassNotFoundException{
-try{
-FileInputStream archivo = new FileInputStream("./personajes.bin");
-ObjectInputStream lectura = new ObjectInputStream(archivo);
+/*public void deserializarUsuario() throws FileNotFoundException, IOException, ClassNotFoundException{
+    try{
+    FileInputStream archivo = new FileInputStream("./personajes.bin");
+    ObjectInputStream lectura = new ObjectInputStream(archivo);
 
-while(true){
-personaje = (Personaje) lectura.readObject();
-System.out.println(personaje.getNombre());
-}
+    while(true){
+    personaje = (Personaje) lectura.readObject();
+    System.out.println(personaje.getNombre());
+    }
 
 
-}catch(EOFException excepcion){
-return;
-}
-catch(IOException error){
-error.printStackTrace(System.out);
-}
-}
-public void serializarUsuario(Personaje personaje){
-try {
-FileOutputStream archivo = new FileOutputStream("./personajes.bin",true);
-try (AñadirContenido escritura = new AñadirContenido(archivo)) {
-escritura.writeObject(personaje);
-}
-}catch (IOException e) {
-}
-}
+    }catch(EOFException excepcion){
+    return;
+    }
+    catch(IOException error){
+    error.printStackTrace(System.out);
+    }
+    }
+    public void serializarUsuario(Personaje personaje){
+    try {
+    FileOutputStream archivo = new FileOutputStream("./personajes.bin",true);
+    try (AñadirContenido escritura = new AñadirContenido(archivo)) {
+    escritura.writeObject(personaje);
+    }
+    }catch (IOException e) {
+    }
+}*/
 
 
 
 public void registrarPersonaje() throws IOException {
-int numEsbirros = (int)(Math. random()*2+1);
-personaje = new Personaje(nick,10f,numEsbirros);
-String ruta;
-//Boolean encontrado;
-//encontrado = false;
-ruta = "C:\\Users\\Usuario\\OneDrive - Universidad Rey Juan Carlos\\Documentos\\NetBeansProjects\\PracticaMP\\PracticaMP\\OneDrive - Universidad Rey Juan Carlos\\Documentos\\NetBeansProjects\\PracticaMP\\"+nick+".bin";
-/*try{
-this.deserializarUsuario();
-}catch(IOException | ClassNotFoundException e){
-File fichero = new File(ruta);
-fichero.createNewFile();
-}
-*/
-File fichero = new File(ruta);
-//if (!fichero.exists()) {
-// fichero.createNewFile();
-// }
+    int numEsbirros = (int)(Math. random()*2+1);
+    Personaje personaje = new Personaje();
+    this.personaje = personaje;
+    String ruta;
+    //Boolean encontrado;
+    //encontrado = false;
+    ruta = "C:\\Users\\Usuario\\OneDrive - Universidad Rey Juan Carlos\\Documentos\\NetBeansProjects\\PracticaMP\\PracticaMP\\OneDrive - Universidad Rey Juan Carlos\\Documentos\\NetBeansProjects\\PracticaMP\\"+nick+".bin";
+    /*try{
+    this.deserializarUsuario();
+    }catch(IOException | ClassNotFoundException e){
+    File fichero = new File(ruta);
+    fichero.createNewFile();
+    }
+    */
+    File fichero = new File(ruta);
+    //if (!fichero.exists()) {
+    // fichero.createNewFile();
+    // }
 
-personaje.getTipo();
-System.out.print("Escriba el nombre que desea para su personaje: ");
-String nombre = lectura.next();
-personaje.setNombre(nombre);
-
-
-serializarUsuario(personaje);
-try {
-deserializarUsuario();
+    personaje.getTipo();
+    System.out.print("Escriba el nombre que desea para su personaje: ");
+    String nombre = lectura.next();
+    //personaje.setNombre(nombre);
 
 
-//serializarUsuario(nombre);
-
-/* Scanner sc = new Scanner(fichero);
-while (sc.hasNext()) {
-sc.nextLine();
-}
-//usar ficheros binarios*/
-} catch (FileNotFoundException ex) {
-Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
-} catch (ClassNotFoundException ex) {
-Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
-}
+    //serializarUsuario(personaje);
+    //deserializarUsuario();
 }
 
 
@@ -194,61 +180,59 @@ System.out.println("Hasta pronto!");
 
 
 public void mostrarMenu() throws IOException, FileNotFoundException, ClassNotFoundException{
-//boolean contEquipo = false;
-boolean salida = false;
-while (salida == false){
-System.out.println("1) REGISTRAR PERSONAJE");
-System.out.println("2) DAR DE BAJA PERSONAJE");
-System.out.println("3) ELEGIR EQUIPO");
-System.out.println("4) CONSULTAR ORO");
-System.out.println("5) CONSULTAR EQUIPO");
-System.out.println("6) CONSULTAR ESBIRROS");
-System.out.println("7) SUBSCRIBIRSE A OFERTA");
-System.out.println("8) CREAR OFERTA");
-System.out.println("9) CONSULTAR OFERTAS PUBLICADAS");
+    //boolean contEquipo = false;
+    boolean salida = false;
+    while (salida == false){
+    System.out.println("1) REGISTRAR PERSONAJE");
+    System.out.println("2) DAR DE BAJA PERSONAJE");
+    System.out.println("3) ELEGIR EQUIPO");
+    System.out.println("4) CONSULTAR ORO");
+    System.out.println("5) CONSULTAR EQUIPO");
+    System.out.println("6) CONSULTAR ESBIRROS");
+    System.out.println("7) SUBSCRIBIRSE A OFERTA");
+    System.out.println("8) CREAR OFERTA");
+    System.out.println("9) CONSULTAR OFERTAS PUBLICADAS");
+
+    String c = lectura.next();
+
+    if ("1".equals(c)){
+        registrarPersonaje();
+    }
+    else if ("2".equals(c)){
+        darDeBajaPersonaje();
+    }
+    else if ("3".equals(c)){
+        elegirEquipo();
+    }
+    else if ("4".equals(c)){
+        consultarOro();
+    }
+    else if ("5".equals(c)){
+        consultarEquipo();
+    }
+    else if ("6".equals(c)){
+        consultarEsbirros();
+    }
+    else if ("7".equals(c)){
+        subscribirseOferta();
+    }
+    else if ("8".equals(c)){
+        crearOferta();
+    }
+    else if ("9".equals(c)){
+        consultarOfertas();
+    }
 
 
 
-String c = lectura.next();
-
-if ("1".equals(c)){
-    registrarPersonaje();
-}
-else if ("2".equals(c)){
-    darDeBajaPersonaje();
-}
-else if ("3".equals(c)){
-    elegirEquipo();
-}
-else if ("4".equals(c)){
-    consultarOro();
-}
-else if ("5".equals(c)){
-    consultarEquipo();
-}
-else if ("6".equals(c)){
-    consultarEsbirros();
-}
-else if ("7".equals(c)){
-    subscribirseOferta();
-}
-else if ("8".equals(c)){
-    crearOferta();
-}
-else if ("9".equals(c)){
-    consultarOfertas();
-}
-
-
-
-else if ("7".equals(c)){
-salida = true;
-salir();
-}
-else{
-System.out.println("Opción no válida");
-}
-}
+    else if ("7".equals(c)){
+        salida = true;
+        salir();
+    }
+    else{
+        System.out.println("Opción no válida");
+    }
+    }
 
 }
 
