@@ -26,6 +26,7 @@ private String contraseña;
 private String numReg;
 public File ficheroUsuario;
 
+
 public Personaje personaje;
 
 //private String tipo;
@@ -116,33 +117,24 @@ public File getFicheroUsuario() {
 
 
 public void registrarPersonaje() throws IOException {
-    int numEsbirros = (int)(Math. random()*2+1);
+    int numEsbirros = (int)(Math. random()*2+1); //pone un numero aleatorio de esbirros
     Personaje personaje = new Personaje();
     this.personaje = personaje;
-    String ruta;
-    //Boolean encontrado;
-    //encontrado = false;
-    ruta = "C:\\Users\\Usuario\\OneDrive - Universidad Rey Juan Carlos\\Documentos\\NetBeansProjects\\PracticaMP\\PracticaMP\\OneDrive - Universidad Rey Juan Carlos\\Documentos\\NetBeansProjects\\PracticaMP\\"+nick+".bin";
-    /*try{
-    this.deserializarUsuario();
-    }catch(IOException | ClassNotFoundException e){
-    File fichero = new File(ruta);
-    fichero.createNewFile();
-    }
-    */
-    File fichero = new File(ruta);
-    //if (!fichero.exists()) {
-    // fichero.createNewFile();
-    // }
 
     personaje.getTipo();
     System.out.print("Escriba el nombre que desea para su personaje: ");
     String nombre = lectura.next();
-    //personaje.setNombre(nombre);
+    this.personaje.setNombre(nombre);
+     
+    //--------------------------
+        FileWriter fw = new FileWriter(personaje.getFicheroPersonajes()); //se procede a comprobar si existe el usuario
+        
+        fw.write(nick);
+        fw.write(" -->");
+        fw.write(nombre);
+        
+        System.out.println("Personaje guardado");
 
-
-    //serializarUsuario(personaje);
-    //deserializarUsuario();
 }
 
 

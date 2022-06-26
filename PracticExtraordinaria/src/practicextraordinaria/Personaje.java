@@ -5,6 +5,7 @@
  */
 package practicextraordinaria;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -23,7 +24,8 @@ public class Personaje implements Serializable{
     private int salud;
     private int edad;
     private Modificador modificador = new Modificador();
-    
+    private File ficheroPersonajes= new File("FicherosMP/ficheroPersonajes.txt");
+        
     private String tipo;
     
     /*private Cazador cazador;
@@ -32,10 +34,17 @@ public class Personaje implements Serializable{
     */
     
     Personaje(){
-        int edad = (int)(Math. random()*10+1);
+        int edad = (int)(Math. random()*10+1);  //edad aleatoria solo para vampiro
         this.nick = nick;
         this.oro = oro;
-        
+    }
+
+    public File getFicheroPersonajes() {
+        return ficheroPersonajes;
+    }
+
+    public void setFicheroPersonajes(File ficheroPersonajes) {
+        this.ficheroPersonajes = ficheroPersonajes;
     }
 
     public void setTipo(String tipo) {
@@ -65,7 +74,7 @@ public class Personaje implements Serializable{
         }
         else if ("3".equals(opcion)){
             setTipo("Vampiro");
-            Vampiro vampiro = new Vampiro(0, 0);
+            Vampiro vampiro = new Vampiro(0, edad);
             
         }
         return tipo;
@@ -76,7 +85,7 @@ public class Personaje implements Serializable{
     }
     
     
-    /*
+    
     
     public String getNombre() {
         return nombre;
@@ -86,7 +95,7 @@ public class Personaje implements Serializable{
         this.nombre = nombre;
     }
     
-    
+    /*
     public void inicializarEsbirros(int j){
         ArrayList<Esbirro> listaEsbirros = new ArrayList<Esbirro>();
         for (int i=0 ; i < j; i++){
