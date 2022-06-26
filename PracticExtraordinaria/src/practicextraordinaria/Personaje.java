@@ -25,6 +25,7 @@ public class Personaje implements Serializable{
     private int edad;
     private Modificador modificador = new Modificador();
     private File ficheroPersonajes= new File("FicherosMP/ficheroPersonajes.txt");
+    private File ficheroOfertas= new File("FicherosMP/ficheroOfertas.txt");
         
     private String tipo;
     
@@ -38,7 +39,7 @@ public class Personaje implements Serializable{
         this.nick = nick;
         this.oro = oro;
     }
-
+    
     public File getFicheroPersonajes() {
         return ficheroPersonajes;
     }
@@ -83,9 +84,7 @@ public class Personaje implements Serializable{
     public Equipo getEquipo() {
         return equipo;
     }
-    
-    
-    
+
     
     public String getNombre() {
         return nombre;
@@ -94,6 +93,13 @@ public class Personaje implements Serializable{
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+    
+     public void setEquipo() {
+        System.out.println("he llegado");
+        //equipo.inicializarEquipo();
+        //equipo.equipar();
+     }
+     
     
     /*
     public void inicializarEsbirros(int j){
@@ -153,15 +159,7 @@ public class Personaje implements Serializable{
     public String getNick() {
         return nick;
     }
-    
-    public void setEquipo() {
-        System.out.println("he llegado");
-        equipo.inicializarEquipo();
-        equipo.equipar();
-    }
-
-    
-
+   
     public ArrayList<Esbirro> getEsbirros() {
         return esbirros;
     }
@@ -194,10 +192,6 @@ public class Personaje implements Serializable{
         this.poder = poder;
     }
 
-
-
-    
-
     public Cazador getCazador() {
         return cazador;
     }
@@ -214,12 +208,12 @@ public class Personaje implements Serializable{
         return modificador;
     }*/
 
-    void setEquipo() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
 
     float getOro() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    
 
 }
